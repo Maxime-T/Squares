@@ -34,6 +34,5 @@ folder_colors={
 "res://Assets/": "red",
 "res://Level/": "orange",
 "res://LocalMultiplayer/": "yellow",
-"res://SteamMulitplayer/": "blue",
-"res://testGit/": "purple"
+"res://SteamMulitplayer/": "blue"
 }
