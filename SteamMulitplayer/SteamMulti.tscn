@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://08yfm1cfvv5u"]
+
+[ext_resource type="Script" path="res://SteamMulitplayer/SteamMulti.gd" id="1_j1kcw"]
+[ext_resource type="PackedScene" uid="uid://brxlw75tlmw23" path="res://Assets/Player/basic_player.tscn" id="2_wcco2"]
+
+[node name="SteamMulti" type="Node2D"]
+script = ExtResource("1_j1kcw")
+player_scene = ExtResource("2_wcco2")
+metadata/_edit_horizontal_guides_ = [7.0]
+
+[node name="Host" type="Button" parent="."]
+offset_left = 219.0
+offset_top = 182.0
+offset_right = 309.0
+offset_bottom = 253.0
+text = "host
+"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://basic_player.tscn")
+spawn_path = NodePath("..")
+
+[node name="LobbyContainer" type="ScrollContainer" parent="."]
+offset_left = 324.0
+offset_top = 181.0
+offset_right = 801.0
+offset_bottom = 431.0
+
+[node name="Lobbies" type="VBoxContainer" parent="LobbyContainer"]
+layout_mode = 2
+
+[node name="Refresh" type="Button" parent="."]
+offset_left = 219.0
+offset_top = 265.0
+offset_right = 309.0
+offset_bottom = 333.0
+text = "Refesh"
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Refresh" to="." method="_on_refresh_pressed"]

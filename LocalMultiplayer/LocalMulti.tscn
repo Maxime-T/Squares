@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmuv6mm7cuwkx"]
+
+[ext_resource type="Script" path="res://LocalMultiplayer/LocalMulti.gd" id="1_d0wag"]
+[ext_resource type="PackedScene" uid="uid://vs5u8d2fxdnt" path="res://Level/Level.tscn" id="2_6e4x7"]
+
+[node name="LocalMulti" type="Node2D"]
+script = ExtResource("1_d0wag")
+level_scene = ExtResource("2_6e4x7")
+metadata/_edit_horizontal_guides_ = [7.0]
+
+[node name="Host" type="Button" parent="."]
+offset_left = 513.0
+offset_top = 243.0
+offset_right = 603.0
+offset_bottom = 314.0
+text = "host
+"
+
+[node name="Join" type="Button" parent="."]
+offset_left = 513.0
+offset_top = 329.0
+offset_right = 603.0
+offset_bottom = 400.0
+text = "Join
+"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
