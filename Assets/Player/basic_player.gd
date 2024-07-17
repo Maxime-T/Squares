@@ -42,15 +42,15 @@ func _physics_process(delta):
 	velocity = direction * speed
 	move_and_slide()
 
-func AccelerationFunction(speed, forwardAxis, delta) -> float:
-	var x : float = speed/MAX_SPEED
+func AccelerationFunction(v, forwardAxis, delta) -> float:
+	var x : float = v/MAX_SPEED
 	x += delta*forwardAxis/TIME_TO_MAX_SPEED
 	x = clamp(x,-1,1)
 	return x
 
 #YOOOOO
-func DecelerationFunction(speed, forwardAxis, delta) -> float:
-	var x : float = 1-abs(speed)/MAX_SPEED
+func DecelerationFunction(v, forwardAxis, delta) -> float:
+	var x : float = 1-abs(v)/MAX_SPEED
 	x += delta/TIME_TO_MAX_SPEED
 	x = clamp(x,0,1)
 	return -pow(abs(x)-1,5)
