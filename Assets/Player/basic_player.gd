@@ -52,5 +52,4 @@ func deceleration_function(v, forwardAxis, delta) -> float:
 	var x : float = acos(abs(v)/MAX_SPEED)*2/PI
 	x += delta/TIME_TO_MAX_SPEED
 	x = clamp(x,-1,1)
-	print(x)
 	return cos(x*PI/2) * sign(v)
