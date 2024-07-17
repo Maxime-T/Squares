@@ -48,6 +48,7 @@ func AccelerationFunction(speed, forwardAxis, delta) -> float:
 	x = clamp(x,-1,1)
 	return x
 
+#YOOOOO
 func DecelerationFunction(speed, forwardAxis, delta) -> float:
 	var x : float = 1-abs(speed)/MAX_SPEED
 	x += delta/TIME_TO_MAX_SPEED
