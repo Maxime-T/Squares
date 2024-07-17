@@ -23,16 +23,15 @@ var angularSpeed : float = 0:
 		angularSpeed = clamp(value, -TURN_SPEED, TURN_SPEED)
 
 func _physics_process(delta):
-	print(speed)
 	if !is_multiplayer_authority():
 		return
 	
 	#Forward movement
 	var forwardAxis = Input.get_axis("Down","Up")
 	if forwardAxis:
-		speed = AccelerationFunction(speed, forwardAxis, delta) * MAX_SPEED
+		speed = acceleration_function(speed, forwardAxis, delta) * MAX_SPEED
 	else:
-		speed = DecelerationFunction(speed, forwardAxis, delta) * MAX_SPEED
+		speed = deceleration_function(speed, forwardAxis, delta) * MAX_SPEED
 	
 	#Turn movement
 	var turnAxis = Input.get_axis("Left","Right")
@@ -42,15 +41,16 @@ func _physics_process(delta):
 	velocity = direction * speed
 	move_and_slide()
 
-func AccelerationFunction(v, forwardAxis, delta) -> float:
+func acceleration_function(v, forwardAxis, delta) -> float:
 	var x : float = v/MAX_SPEED
 	x += delta*forwardAxis/TIME_TO_MAX_SPEED
 	x = clamp(x,-1,1)
 	return x
 
-#YOOOOO
-func DecelerationFunction(v, forwardAxis, delta) -> float:
-	var x : float = 1-abs(v)/MAX_SPEED
+
+func deceleration_function(v, forwardAxis, delta) -> float:
+	var x : float = acos(abs(v)/MAX_SPEED)*2/PI
 	x += delta/TIME_TO_MAX_SPEED
-	x = clamp(x,0,1)
-	return -pow(abs(x)-1,5)
+	x = clamp(x,-1,1)
+	print(x)
+	return cos(x*PI/2) * sign(v)
