@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 @export_group("Movement")
 @export_range(0,1000,0.5) var MAX_SPEED : float = 400
-@export_range(0,1000,0.01) var TIME_TO_MAX_SPEED : float = 0.25
+@export_range(0,2,0.01) var TIME_TO_MAX_SPEED : float = 0.25
 @export_range(0,360*2,0.1,"degrees") var TURN_SPEED : float = 2.5
-@export_range(0,1000,0.01) var TIME_TO_MAX_ANGULAR_SPEED : float = 0.25
+@export_range(0,2,0.01) var TIME_TO_MAX_ANGULAR_SPEED : float = 0.25
 
 var ACCELERATION = MAX_SPEED * (1/TIME_TO_MAX_SPEED)
 var TURN_ACCELERATION = TURN_SPEED/TIME_TO_MAX_SPEED
