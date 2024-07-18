@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export_group("Movement")
 @export_range(0,1000,0.5) var MAX_SPEED : float = 400
@@ -33,21 +34,28 @@ var angularSpeed : float = 0:
 	set(value):
 		angularSpeed = clamp(value, -TURN_SPEED, TURN_SPEED)
 
-func _input(event):
-	if !is_multiplayer_authority():
-		return
-		
-	if event.is_action_pressed("LeftClic"):
-		spawner.spawn(BulletScene)
+#.######################################################################
+#.                             RUNTIME                                 #                                                     #
+#.######################################################################
 
 func _ready():
 	spawner.spawn_function = spawnBullet
+	dead.connect(killed)
+
+func _input(event):
+	if !is_multiplayer_authority():
+		return
 	
-	
+	shoot_if_click(event)
+
 func _physics_process(delta):
 	if !is_multiplayer_authority():
 		return
 	
+	movement(delta)
+
+#mouvement ##########################################################
+func movement(delta) -> void:
 	#Forward movement
 	var forwardAxis = Input.get_axis("Down","Up")
 	if forwardAxis:
@@ -73,15 +81,14 @@ func acceleration_function(v, forwardAxis, delta) -> float:
 	x = clamp(x,-1,1)
 	return x
 
-
-func deceleration_function(v, forwardAxis, delta) -> float:
+func deceleration_function(v, _forwardAxis, delta) -> float:
 	var x : float = acos(abs(v)/MAX_SPEED)*2/PI
 	x += delta/TIME_TO_MAX_SPEED
 	x = clamp(x,-1,1)
 	return cos(x*PI/2) * sign(v)
 
-
-func spawnBullet(data):
+#shoot ##############################################################
+func spawnBullet(_data):
 	var b : Node2D = BulletScene.instantiate()
 	b.spawnRot = turretTrueRotation
 	b.spawnPos = EndOfCannon.global_position
@@ -91,3 +98,33 @@ func spawnBullet(data):
 	var auth = get_multiplayer_authority()
 	b.set_multiplayer_authority(auth)
 	return b
+
+func shoot_if_click(event) -> void:
+	if event.is_action_pressed("LeftClic"):
+		spawner.spawn(BulletScene)
+
+#life ###############################################################
+@export_group("Life")
+@export var MAX_HP : float = 100
+
+signal dead
+@onready var hp = MAX_HP :
+	set(value):
+		hp = clamp(value, 0, MAX_HP)
+
+##make the player take damage,
+##dead signal is emited if hp fall at 0, put dealer = null if no dealer is known
+func take_damage(damage : float, dealer : Player) -> void:
+	hp -= damage
+	if_killed_emit(dealer)
+
+func set_hp(_hp):
+	hp = _hp
+	if_killed_emit(null)
+
+func if_killed_emit(dealer : Player) -> void:
+	if hp <= 0:
+		dead.emit(dealer)
+
+func killed(_dealer):
+	queue_free()

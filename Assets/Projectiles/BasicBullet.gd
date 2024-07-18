@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
 @export_group("Properties")
-@export var speed : int = 400
-@export var dmg : int = 5
+@export var speed : int = 1000
+@export var dmg : int = 25
 
 @export var direction : float
 var spawnPos : Vector2
 var spawnRot : float
 var zdex : int
-var shooter : CharacterBody2D
+var shooter : Player
 
 func _ready():
 	if !is_multiplayer_authority():
@@ -29,4 +29,6 @@ func _on_life_timer_timeout():
 
 
 func _on_area_2d_body_entered(body):
+	if (body.has_method("take_damage")):
+		body.take_damage(dmg,shooter)
 	queue_free()
