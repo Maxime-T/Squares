@@ -10,12 +10,13 @@ extends CharacterBody2D
 @export var BodyNode : Node2D
 @export var TurretNode : Node2D
 @export var EndOfCannon : Marker2D
+@export var BulletScene : PackedScene
+@export var spawner : MultiplayerSpawner
 
 @onready var ACCELERATION = MAX_SPEED/TIME_TO_MAX_SPEED
 @onready var TURN_ACCELERATION = TURN_SPEED/TIME_TO_MAX_SPEED
 
 @onready var MainLevel = $".." #C'est clairement pas ouf de faire comme ca, faudra changer
-@onready var Projectile = load("res://Assets/Projectiles/basic_bullet.tscn")
 
 var turretTrueRotation : float = 0
 
@@ -37,8 +38,12 @@ func _input(event):
 		return
 		
 	if event.is_action_pressed("LeftClic"):
-		shoot()
-		
+		spawner.spawn(BulletScene)
+
+func _ready():
+	spawner.spawn_function = spawnBullet
+	
+	
 func _physics_process(delta):
 	if !is_multiplayer_authority():
 		return
@@ -75,9 +80,14 @@ func deceleration_function(v, forwardAxis, delta) -> float:
 	x = clamp(x,-1,1)
 	return cos(x*PI/2) * sign(v)
 
-func shoot():
-	var instance = Projectile.instantiate()
-	instance.spawnRot = turretTrueRotation
-	instance.spawnPos = EndOfCannon.global_position
-	instance.zdex = z_index - 1
-	MainLevel.add_child(instance, true)
+
+func spawnBullet(data):
+	var b : Node2D = BulletScene.instantiate()
+	b.spawnRot = turretTrueRotation
+	b.spawnPos = EndOfCannon.global_position
+	b.zdex = z_index - 1
+	#b.global_transform = TurretNode.global_transform
+	b.shooter = self
+	var auth = get_multiplayer_authority()
+	b.set_multiplayer_authority(auth)
+	return b

@@ -4,15 +4,18 @@ extends CharacterBody2D
 @export var speed : int = 400
 @export var dmg : int = 5
 
-var direction : float
+@export var direction : float
 var spawnPos : Vector2
 var spawnRot : float
 var zdex : int
+var shooter : CharacterBody2D
 
 func _ready():
+	if !is_multiplayer_authority():
+		return
+	direction = spawnRot
 	global_position = spawnPos
 	global_rotation = spawnRot
-	direction = spawnRot
 	z_index = zdex
 
 
