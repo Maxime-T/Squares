@@ -17,7 +17,6 @@ text = "host
 "
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://basic_player.tscn")
 spawn_path = NodePath("..")
 
 [node name="LobbyContainer" type="ScrollContainer" parent="."]
