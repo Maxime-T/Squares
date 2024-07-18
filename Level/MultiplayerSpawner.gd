@@ -12,6 +12,7 @@ func _ready():
 var players = {}
 
 func spawnPlayer(data):
+	print(data)
 	var p : Node2D = playerScene.instantiate()
 	p.position = Vector2(500,500)
 	p.set_multiplayer_authority(data)

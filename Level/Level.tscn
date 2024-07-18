@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://vs5u8d2fxdnt"]
+[gd_scene load_steps=4 format=3 uid="uid://vs5u8d2fxdnt"]
 
 [ext_resource type="Script" path="res://Level/MultiplayerSpawner.gd" id="1_ymh5e"]
 [ext_resource type="PackedScene" uid="uid://brxlw75tlmw23" path="res://Assets/Player/basic_player.tscn" id="2_o7oqh"]
+[ext_resource type="PackedScene" uid="uid://paeb80ee0aqf" path="res://Assets/Boxs/box.tscn" id="3_xrhk0"]
 
 [node name="Level" type="Node"]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Assets/Projectiles/basic_bullet.tscn")
 spawn_path = NodePath(".")
 script = ExtResource("1_ymh5e")
 playerScene = ExtResource("2_o7oqh")
+
+[node name="Box" parent="." instance=ExtResource("3_xrhk0")]
+position = Vector2(173, 153)
