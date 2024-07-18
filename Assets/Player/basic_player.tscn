@@ -5,31 +5,46 @@
 [ext_resource type="Texture2D" uid="uid://kgucvyl3ddtv" path="res://Assets/Player/tank_top.png" id="3_plv0x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4ykw"]
-size = Vector2(240, 336)
+size = Vector2(101, 71)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lqpvl"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Turret:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
-[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode")]
+[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon")]
+collision_mask = 31
 script = ExtResource("1_wkey8")
 TURN_SPEED = 180.0
 BodyNode = NodePath("Body")
 TurretNode = NodePath("Turret")
+EndOfCannon = NodePath("Turret/EndOfCannon")
 
 [node name="Body" type="Node2D" parent="."]
 
 [node name="TankBot" type="Sprite2D" parent="Body"]
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_6rg5v")
 
 [node name="Turret" type="Node2D" parent="."]
 
 [node name="TankTop" type="Sprite2D" parent="Turret"]
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_plv0x")
-offset = Vector2(0, -87)
+offset = Vector2(80, -7)
+
+[node name="EndOfCannon" type="Marker2D" parent="Turret"]
+position = Vector2(73, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_v4ykw")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

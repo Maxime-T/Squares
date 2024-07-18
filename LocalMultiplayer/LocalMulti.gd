@@ -19,7 +19,7 @@ func _on_join_pressed():
 	multiplayer.multiplayer_peer = peer
 	hideMenu()
 
-func spawn_level(data):
+func spawn_level(_data):
 	var a = level_scene.instantiate()
 	return a
 

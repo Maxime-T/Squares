@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtmjehvl41y6h"]
+
+[ext_resource type="Script" path="res://Assets/Projectiles/BasicBullet.gd" id="1_77x5i"]
+[ext_resource type="Texture2D" uid="uid://cgjxaask8sbty" path="res://Assets/Projectiles/TankBullet.png" id="2_6iyqt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mry6x"]
+size = Vector2(25, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7283n"]
+size = Vector2(31, 16)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kxnab"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="BasicBullet" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_77x5i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15, 0)
+rotation = 4.71239
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_6iyqt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13.5, 0)
+shape = SubResource("RectangleShape2D_mry6x")
+debug_color = Color(0.80526, 0.416262, 0, 0.42)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(14.5, 0)
+shape = SubResource("RectangleShape2D_7283n")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_kxnab")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
