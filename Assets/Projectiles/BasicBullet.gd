@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name BasicBullet
 
 @export_group("Properties")
 @export var speed : int = 1000
@@ -24,11 +25,11 @@ func _physics_process(_delta):
 	move_and_slide()
 
 
-func _on_life_timer_timeout():
+func _on_area_2d_area_entered(area):
+	if area is HurtBox:
+		area.take_damage(dmg, shooter)
 	queue_free()
 
 
 func _on_area_2d_body_entered(body):
-	if (body.has_method("take_damage")):
-		body.take_damage(dmg,shooter)
 	queue_free()

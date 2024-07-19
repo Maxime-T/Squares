@@ -1,12 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://brxlw75tlmw23"]
+[gd_scene load_steps=10 format=3 uid="uid://brxlw75tlmw23"]
 
 [ext_resource type="Script" path="res://Assets/Player/basic_player.gd" id="1_wkey8"]
 [ext_resource type="Texture2D" uid="uid://d12ex0oxrd1as" path="res://Assets/Player/tank_bot.png" id="2_6rg5v"]
 [ext_resource type="PackedScene" uid="uid://dtmjehvl41y6h" path="res://Assets/Projectiles/basic_bullet.tscn" id="2_ohid7"]
 [ext_resource type="Texture2D" uid="uid://kgucvyl3ddtv" path="res://Assets/Player/tank_top.png" id="3_plv0x"]
+[ext_resource type="Script" path="res://Component/Health.gd" id="5_jcr2i"]
+[ext_resource type="Script" path="res://Component/HurtBox.gd" id="6_hrxvq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4ykw"]
-size = Vector2(101, 71)
+size = Vector2(92, 64)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lqpvl"]
 properties/0/path = NodePath(".:position")
@@ -18,6 +20,9 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("Turret:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_300em"]
+size = Vector2(94, 66)
 
 [node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "spawner")]
 collision_mask = 31
@@ -46,8 +51,6 @@ offset = Vector2(80, -7)
 position = Vector2(73, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_v4ykw")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -55,3 +58,16 @@ replication_config = SubResource("SceneReplicationConfig_lqpvl")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath(".")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("5_jcr2i")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("6_hrxvq")
+health_component = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_300em")
+
+[connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]

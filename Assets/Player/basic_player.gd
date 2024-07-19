@@ -40,7 +40,6 @@ var angularSpeed : float = 0:
 
 func _ready():
 	spawner.spawn_function = spawnBullet
-	dead.connect(killed)
 
 func _input(event):
 	if !is_multiplayer_authority():
@@ -103,28 +102,8 @@ func shoot_if_click(event) -> void:
 	if event.is_action_pressed("LeftClic"):
 		spawner.spawn(BulletScene)
 
-#life ###############################################################
-@export_group("Life")
-@export var MAX_HP : float = 100
 
-signal dead
-@onready var hp = MAX_HP :
-	set(value):
-		hp = clamp(value, 0, MAX_HP)
 
-##make the player take damage,
-##dead signal is emited if hp fall at 0, put dealer = null if no dealer is known
-func take_damage(damage : float, dealer : Player) -> void:
-	hp -= damage
-	if_killed_emit(dealer)
-
-func set_hp(_hp):
-	hp = _hp
-	if_killed_emit(null)
-
-func if_killed_emit(dealer : Player) -> void:
-	if hp <= 0:
-		dead.emit(dealer)
-
-func killed(_dealer):
+#health ##########################################################
+func _on_health_died(dealer : Player):
 	queue_free()

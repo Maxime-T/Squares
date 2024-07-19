@@ -40,10 +40,11 @@ version_control/autoload_on_startup=true
 
 folder_colors={
 "res://Assets/": "red",
-"res://Level/": "orange",
-"res://LocalMultiplayer/": "yellow",
-"res://SteamMulitplayer/": "blue",
-"res://Utils/": "purple"
+"res://Component/": "orange",
+"res://Level/": "yellow",
+"res://LocalMultiplayer/": "blue",
+"res://SteamMulitplayer/": "purple",
+"res://Utils/": "pink"
 }
 
 [input]
