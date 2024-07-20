@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://vs5u8d2fxdnt"]
+[gd_scene load_steps=8 format=3 uid="uid://vs5u8d2fxdnt"]
 
 [ext_resource type="Script" path="res://Level/MultiplayerSpawner.gd" id="1_ymh5e"]
 [ext_resource type="PackedScene" uid="uid://brxlw75tlmw23" path="res://Assets/Player/basic_player.tscn" id="2_o7oqh"]
 [ext_resource type="Texture2D" uid="uid://c6qcip37i1tl7" path="res://Level/spritesheet_tiles.png" id="4_pwl0y"]
+[ext_resource type="PackedScene" uid="uid://18u5uq2wbw68" path="res://Assets/Mines/explosive_mine.tscn" id="4_vesw0"]
+[ext_resource type="PackedScene" uid="uid://bcg6lfspbm4gs" path="res://Assets/Mines/gaz_mine.tscn" id="5_h1jy5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1j63a"]
 texture = ExtResource("4_pwl0y")
@@ -1812,3 +1814,9 @@ position = Vector2(160, 928)
 
 [node name="Spawn2" type="Marker2D" parent="."]
 position = Vector2(1760, 160)
+
+[node name="ExplosiveMine" parent="." instance=ExtResource("4_vesw0")]
+position = Vector2(639, 545)
+
+[node name="GazMine" parent="." instance=ExtResource("5_h1jy5")]
+position = Vector2(524, 884)

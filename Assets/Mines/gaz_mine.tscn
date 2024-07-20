@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcg6lfspbm4gs"]
+
+[ext_resource type="PackedScene" uid="uid://c5iv5kwferjm3" path="res://Assets/Mines/basic_mine.tscn" id="1_h7r1j"]
+[ext_resource type="Script" path="res://Assets/Mines/gaz_mine.gd" id="2_i235d"]
+
+[node name="GazMine" instance=ExtResource("1_h7r1j")]
+script = ExtResource("2_i235d")
+dmgPerTick = 5.0
+cloudDuration = 7.0
+cloudSize = 6.5

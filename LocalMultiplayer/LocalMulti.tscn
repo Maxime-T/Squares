@@ -29,6 +29,7 @@ text = "Join
 spawn_path = NodePath("..")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
 offset_left = 374.0
 offset_top = 31.0
 offset_right = 1483.0

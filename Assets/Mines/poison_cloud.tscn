@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://v83vm6e5dis8"]
+
+[ext_resource type="Texture2D" uid="uid://bapefdm7tvy0r" path="res://Assets/Mines/tank_explosion9.png" id="1_347ka"]
+[ext_resource type="Script" path="res://Assets/Mines/poison_cloud.gd" id="1_yo0ae"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l6ll0"]
+radius = 25.0
+
+[node name="PoisonCloud" type="Area2D" node_paths=PackedStringArray("LifeTimer")]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_yo0ae")
+LifeTimer = NodePath("LifeTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_l6ll0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.262745, 0.521569, 0.32549, 0.564706)
+texture = ExtResource("1_347ka")
+
+[node name="TickRate" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="LifeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="TickRate" to="." method="_on_tick_rate_timeout"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

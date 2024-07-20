@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5iv5kwferjm3"]
+
+[ext_resource type="Script" path="res://Assets/Mines/basic_mine.gd" id="1_abvd0"]
+[ext_resource type="Texture2D" uid="uid://c0i2whxntwob0" path="res://Assets/Mines/tanks_mineOff.png" id="1_dlaat"]
+[ext_resource type="Texture2D" uid="uid://bv2u7c6iqxk08" path="res://Assets/Mines/tanks_mineOn.png" id="2_2g6c7"]
+[ext_resource type="AudioStream" uid="uid://c5vq3866ave0r" path="res://Assets/Mines/bipbip.mp3" id="4_hv5vn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bsvfw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dlaat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2g6c7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6suy"]
+radius = 75.1665
+
+[node name="BasicMine" type="Area2D" node_paths=PackedStringArray("Audio", "Sprite")]
+z_index = -1
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_abvd0")
+Audio = NodePath("AudioStreamPlayer2D")
+Sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_bsvfw")
+autoplay = "default"
+frame_progress = 0.93508
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m6suy")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hv5vn")
+pitch_scale = 1.5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
