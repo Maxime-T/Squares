@@ -14,6 +14,7 @@ class_name Player
 @export var BulletScene : PackedScene
 @export var ColliBox : CollisionShape2D
 @export var spawner : MultiplayerSpawner
+@export var Pseudo : Label
 
 @onready var ACCELERATION = MAX_SPEED/TIME_TO_MAX_SPEED
 @onready var TURN_ACCELERATION = TURN_SPEED/TIME_TO_MAX_SPEED
@@ -42,6 +43,7 @@ var angularSpeed : float = 0:
 
 func _ready():
 	spawner.spawn_function = spawnBullet
+	Pseudo.text = Steam.getPersonaName()
 
 func _input(event):
 	if !is_multiplayer_authority():

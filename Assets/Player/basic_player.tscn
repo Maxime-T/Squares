@@ -31,7 +31,7 @@ properties/3/replication_mode = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yn3bj"]
 bg_color = Color(0.0127844, 0.705587, 0, 1)
 
-[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "ColliBox", "spawner")]
+[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "ColliBox", "spawner", "Pseudo")]
 collision_mask = 23
 script = ExtResource("1_wkey8")
 TURN_SPEED = 180.0
@@ -41,6 +41,7 @@ EndOfCannon = NodePath("Turret/EndOfCannon")
 BulletScene = ExtResource("2_ohid7")
 ColliBox = NodePath("CollisionBox")
 spawner = NodePath("MultiplayerSpawner")
+Pseudo = NodePath("HUD/VBoxContainer/Pseudo")
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -81,6 +82,7 @@ script = ExtResource("5_jcr2i")
 [node name="HUD" type="Control" parent="." node_paths=PackedStringArray("health_component", "life_bar", "name_label")]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 3
+anchors_preset = 0
 offset_left = -50.0
 offset_top = -90.0
 offset_right = 50.0
