@@ -7,6 +7,7 @@ extends Control
 var MAX_HP : float
 
 func _ready():
+	name_label.text = Steam.getPersonaName()
 	life_bar.max_value
 	MAX_HP = health_component.MAX_HP
 	life_bar.value = MAX_HP
