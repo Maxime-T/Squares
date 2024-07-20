@@ -26,10 +26,17 @@ func _physics_process(_delta):
 
 
 func _on_area_2d_area_entered(area):
+	if !is_multiplayer_authority():
+		return
+	
 	if area is HurtBox:
 		area.take_damage(dmg, shooter)
+	
 	queue_free()
 
 
 func _on_area_2d_body_entered(body):
+	if !is_multiplayer_authority():
+		return
+	
 	queue_free()

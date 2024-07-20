@@ -98,12 +98,16 @@ func spawnBullet(_data):
 	b.set_multiplayer_authority(auth)
 	return b
 
+
 func shoot_if_click(event) -> void:
 	if event.is_action_pressed("LeftClic"):
 		spawner.spawn(BulletScene)
 
 
-
 #health ##########################################################
 func _on_health_died(dealer : Player):
+	rpc("death")
+
+@rpc("any_peer", "call_local")
+func death() -> void:
 	queue_free()

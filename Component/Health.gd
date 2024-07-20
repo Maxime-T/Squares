@@ -12,6 +12,7 @@ signal died
 ##died signal is emited if hp fall at 0, put dealer = null if no dealer is known
 func take_damage(damage : float, dealer : Player) -> void:
 	hp -= damage
+	print(hp, ": ", get_viewport().size)
 	if_killed_emit(dealer)
 
 func set_hp(_hp) -> void:
