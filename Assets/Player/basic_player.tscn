@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://brxlw75tlmw23"]
+[gd_scene load_steps=12 format=3 uid="uid://brxlw75tlmw23"]
 
 [ext_resource type="Script" path="res://Assets/Player/basic_player.gd" id="1_wkey8"]
 [ext_resource type="Texture2D" uid="uid://d12ex0oxrd1as" path="res://Assets/Player/tank_bot.png" id="2_6rg5v"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://kgucvyl3ddtv" path="res://Assets/Player/tank_top.png" id="3_plv0x"]
 [ext_resource type="Script" path="res://Component/Health.gd" id="5_jcr2i"]
 [ext_resource type="Script" path="res://Component/HurtBox.gd" id="6_hrxvq"]
+[ext_resource type="Script" path="res://Assets/Player/HUD.gd" id="7_jfsdt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_300em"]
+size = Vector2(94, 66)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4ykw"]
 size = Vector2(92, 64)
@@ -14,24 +18,28 @@ size = Vector2(92, 64)
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
+properties/1/path = NodePath("Turret:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Turret:rotation")
+properties/2/path = NodePath("Body:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("CollisionBox:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_300em"]
-size = Vector2(94, 66)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yn3bj"]
+bg_color = Color(0.0127844, 0.705587, 0, 1)
 
-[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "spawner")]
-collision_mask = 31
+[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "ColliBox", "spawner")]
+collision_mask = 23
 script = ExtResource("1_wkey8")
 TURN_SPEED = 180.0
 BodyNode = NodePath("Body")
 TurretNode = NodePath("Turret")
 EndOfCannon = NodePath("Turret/EndOfCannon")
 BulletScene = ExtResource("2_ohid7")
+ColliBox = NodePath("CollisionBox")
 spawner = NodePath("MultiplayerSpawner")
 
 [node name="Body" type="Node2D" parent="."]
@@ -39,6 +47,14 @@ spawner = NodePath("MultiplayerSpawner")
 [node name="TankBot" type="Sprite2D" parent="Body"]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_6rg5v")
+
+[node name="HurtBox" type="Area2D" parent="Body" node_paths=PackedStringArray("health_component")]
+collision_mask = 8
+script = ExtResource("6_hrxvq")
+health_component = NodePath("../../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HurtBox"]
+shape = SubResource("RectangleShape2D_300em")
 
 [node name="Turret" type="Node2D" parent="."]
 
@@ -50,7 +66,7 @@ offset = Vector2(80, -7)
 [node name="EndOfCannon" type="Marker2D" parent="Turret"]
 position = Vector2(73, -2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v4ykw")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -62,12 +78,38 @@ spawn_path = NodePath(".")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_jcr2i")
 
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
-script = ExtResource("6_hrxvq")
+[node name="HUD" type="Control" parent="." node_paths=PackedStringArray("health_component", "life_bar", "name_label")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 3
+offset_left = -50.0
+offset_top = -90.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("7_jfsdt")
 health_component = NodePath("../Health")
+life_bar = NodePath("VBoxContainer/HPBar")
+name_label = NodePath("VBoxContainer/Pseudo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("RectangleShape2D_300em")
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pseudo" type="Label" parent="HUD/VBoxContainer"]
+layout_mode = 2
+text = "Salut"
+horizontal_alignment = 1
+
+[node name="HPBar" type="ProgressBar" parent="HUD/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_yn3bj")
+value = 50.0
+show_percentage = false
 
 [connection signal="died" from="Health" to="." method="_on_health_died"]
-[connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]
+[connection signal="healt_changed" from="Health" to="HUD" method="_on_health_healt_changed"]

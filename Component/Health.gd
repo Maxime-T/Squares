@@ -1,12 +1,14 @@
 extends Node
 class_name Health
 
-signal died 
+signal died
+signal healt_changed
 
 @export var MAX_HP : float = 100
 @onready var hp = MAX_HP :
 	set(value):
 		hp = clamp(value, 0, MAX_HP)
+		healt_changed.emit(hp)
 
 ##make the player take damage,
 ##died signal is emited if hp fall at 0, put dealer = null if no dealer is known

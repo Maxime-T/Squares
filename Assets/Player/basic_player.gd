@@ -12,6 +12,7 @@ class_name Player
 @export var TurretNode : Node2D
 @export var EndOfCannon : Marker2D
 @export var BulletScene : PackedScene
+@export var ColliBox : CollisionShape2D
 @export var spawner : MultiplayerSpawner
 
 @onready var ACCELERATION = MAX_SPEED/TIME_TO_MAX_SPEED
@@ -24,7 +25,8 @@ var turretTrueRotation : float = 0
 var direction : Vector2 = Vector2(0,-1):
 	set(value):
 		direction = value.normalized()
-		rotation = direction.angle()
+		BodyNode.rotation = direction.angle()
+		ColliBox.rotation = direction.angle()
 
 var speed : float = 0:
 	set(value):
