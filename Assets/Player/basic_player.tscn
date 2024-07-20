@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://brxlw75tlmw23"]
+[gd_scene load_steps=13 format=3 uid="uid://brxlw75tlmw23"]
 
 [ext_resource type="Script" path="res://Assets/Player/basic_player.gd" id="1_wkey8"]
 [ext_resource type="Texture2D" uid="uid://d12ex0oxrd1as" path="res://Assets/Player/tank_bot.png" id="2_6rg5v"]
@@ -28,8 +28,17 @@ properties/3/path = NodePath("CollisionBox:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1aanr"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 4.0
+expand_margin_right = 2.0
+expand_margin_bottom = 4.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yn3bj"]
 bg_color = Color(0.0127844, 0.705587, 0, 1)
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 
 [node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "ColliBox", "spawner")]
 collision_mask = 23
@@ -107,6 +116,7 @@ horizontal_alignment = 1
 
 [node name="HPBar" type="ProgressBar" parent="HUD/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1aanr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yn3bj")
 value = 50.0
 show_percentage = false

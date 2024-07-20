@@ -13,4 +13,8 @@ func _ready():
 	
 
 func _on_health_healt_changed(hp):
+	rpc("update_hp", hp)
+
+@rpc("call_local", "any_peer", "reliable")
+func update_hp(hp):
 	life_bar.value = hp
