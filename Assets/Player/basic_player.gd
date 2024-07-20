@@ -37,10 +37,6 @@ var angularSpeed : float = 0:
 	set(value):
 		angularSpeed = clamp(value, -TURN_SPEED, TURN_SPEED)
 
-#.######################################################################
-#.                             RUNTIME                                 #                                                     #
-#.######################################################################
-
 func _ready():
 	spawner.spawn_function = spawnBullet
 	Pseudo.text = Steam.getPersonaName()
@@ -93,15 +89,15 @@ func deceleration_function(v, _forwardAxis, delta) -> float:
 #shoot ##############################################################
 func spawnBullet(_data):
 	var b : Node2D = BulletScene.instantiate()
-	b.spawnRot = turretTrueRotation
-	b.spawnPos = EndOfCannon.global_position
-	b.zdex = z_index - 1
+	var w = b.weapon
+	w.spawnRot = turretTrueRotation
+	w.spawnPos = EndOfCannon.global_position
+	w.zdex = z_index - 1
 	#b.global_transform = TurretNode.global_transform
-	b.shooter = self
+	w.shooter = self
 	var auth = get_multiplayer_authority()
 	b.set_multiplayer_authority(auth)
 	return b
-
 
 func shoot_if_click(event) -> void:
 	if event.is_action_pressed("LeftClic"):

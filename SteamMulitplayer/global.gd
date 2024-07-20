@@ -2,8 +2,8 @@ extends Node
 
 func _ready() -> void:
 	# Set your game's Steam app ID here
-	OS.set_environment("SteamAppId", str(480))
-	OS.set_environment("SteamGameId", str(480))
+	OS.set_environment("SteamAppId", str(583950))
+	OS.set_environment("SteamGameId", str(583950))
 	initialize_steam()
 
 func initialize_steam() -> void:
