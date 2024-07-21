@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Assets/Player/basic_player.gd" id="1_wkey8"]
 [ext_resource type="Texture2D" uid="uid://d12ex0oxrd1as" path="res://Assets/Player/tank_bot.png" id="2_6rg5v"]
-[ext_resource type="PackedScene" uid="uid://18u5uq2wbw68" path="res://Assets/Mines/explosive_mine.tscn" id="2_cxcbr"]
+[ext_resource type="PackedScene" uid="uid://vlbaq2hhecpn" path="res://Assets/Projectiles/Bullet.tscn" id="2_ox51s"]
 [ext_resource type="Texture2D" uid="uid://kgucvyl3ddtv" path="res://Assets/Player/tank_top.png" id="3_plv0x"]
 [ext_resource type="Script" path="res://Component/Health.gd" id="5_jcr2i"]
 [ext_resource type="Script" path="res://Component/HurtBox.gd" id="6_hrxvq"]
@@ -50,7 +50,7 @@ TURN_SPEED = 180.0
 BodyNode = NodePath("Body")
 TurretNode = NodePath("Turret")
 EndOfCannon = NodePath("Turret/EndOfCannon")
-BulletScene = ExtResource("2_cxcbr")
+BulletScene = ExtResource("2_ox51s")
 ColliBox = NodePath("CollisionBox")
 spawner = NodePath("MultiplayerSpawner")
 
