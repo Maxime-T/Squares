@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpd0rwei7pcer"]
+
+[ext_resource type="Script" path="res://Assets/Mines/explosion.gd" id="1_pc018"]
+[ext_resource type="Texture2D" uid="uid://dmbrs3hwmqgcv" path="res://Assets/Mines/Full_Explosion.png" id="1_ve215"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mqrwb"]
+radius = 19.0
+
+[sub_resource type="Animation" id="Animation_yi1yl"]
+resource_name = "Explosion"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExplosionSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExplosionSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ubsai"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExplosionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_txg3n"]
+_data = {
+"Explosion": SubResource("Animation_yi1yl"),
+"RESET": SubResource("Animation_ubsai")
+}
+
+[node name="Explosion" type="Area2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_pc018")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mqrwb")
+
+[node name="ExplosionSprite" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_ve215")
+hframes = 3
+
+[node name="ExplosionAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_txg3n")
+}
+autoplay = "Explosion"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

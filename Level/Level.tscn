@@ -1817,6 +1817,7 @@ position = Vector2(1760, 160)
 
 [node name="ExplosiveMine" parent="." instance=ExtResource("4_vesw0")]
 position = Vector2(639, 545)
+explosionSize = 5.5
 
 [node name="GazMine" parent="." instance=ExtResource("5_h1jy5")]
 position = Vector2(524, 884)
