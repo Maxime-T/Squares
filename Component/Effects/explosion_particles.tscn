@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://bi1k08734pw71"]
+
+[sub_resource type="Curve" id="Curve_b5pwp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t53eg"]
+curve = SubResource("Curve_b5pwp")
+
+[sub_resource type="Gradient" id="Gradient_dh7dx"]
+colors = PackedColorArray(1, 1, 0.392157, 1, 0.988235, 0.941176, 0.0705882, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h87x1"]
+gradient = SubResource("Gradient_dh7dx")
+
+[sub_resource type="Gradient" id="Gradient_idg6k"]
+colors = PackedColorArray(0.92549, 0.882353, 0.309804, 1, 1, 0.298039, 0.129412, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6svs4"]
+gradient = SubResource("Gradient_idg6k")
+
+[sub_resource type="Curve" id="Curve_yh3e6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u4ug7"]
+curve = SubResource("Curve_yh3e6")
+
+[sub_resource type="Curve" id="Curve_0w6mw"]
+_data = [Vector2(0, 1), 0.0, -0.0697954, 0, 0, Vector2(1, 0), -0.161401, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_60a7c"]
+curve = SubResource("Curve_0w6mw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lml3e"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
+damping_max = 1000.0
+damping_curve = SubResource("CurveTexture_u4ug7")
+scale_min = 0.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_60a7c")
+color_ramp = SubResource("GradientTexture1D_6svs4")
+color_initial_ramp = SubResource("GradientTexture1D_h87x1")
+alpha_curve = SubResource("CurveTexture_t53eg")
+hue_variation_max = 0.05
+
+[node name="ExplosionParticles" type="GPUParticles2D"]
+modulate = Color(2, 2, 2, 1)
+emitting = false
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_lml3e")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+draw_order = 0
+trail_lifetime = 0.2
