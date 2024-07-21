@@ -14,7 +14,6 @@ class_name Player
 @export var BulletScene : PackedScene
 @export var ColliBox : CollisionShape2D
 @export var spawner : MultiplayerSpawner
-@export var Pseudo : Label
 
 @onready var ACCELERATION = MAX_SPEED/TIME_TO_MAX_SPEED
 @onready var TURN_ACCELERATION = TURN_SPEED/TIME_TO_MAX_SPEED
@@ -39,7 +38,6 @@ var angularSpeed : float = 0:
 
 func _ready():
 	spawner.spawn_function = spawnBullet
-	Pseudo.text = Steam.getPersonaName()
 
 func _input(event):
 	if !is_multiplayer_authority():
@@ -89,11 +87,12 @@ func deceleration_function(v, _forwardAxis, delta) -> float:
 #shoot ##############################################################
 func spawnBullet(_data):
 	var b : Node2D = BulletScene.instantiate()
+	b.global_position = EndOfCannon.global_position
+	
 	var w = b.weapon
 	w.spawnRot = turretTrueRotation
 	w.spawnPos = EndOfCannon.global_position
 	w.zdex = z_index - 1
-	#b.global_transform = TurretNode.global_transform
 	w.shooter = self
 	var auth = get_multiplayer_authority()
 	b.set_multiplayer_authority(auth)

@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://18u5uq2wbw68"]
+[gd_scene load_steps=5 format=3 uid="uid://18u5uq2wbw68"]
 
 [ext_resource type="PackedScene" uid="uid://c5iv5kwferjm3" path="res://Assets/Mines/basic_mine.tscn" id="1_5b5bg"]
 [ext_resource type="Script" path="res://Assets/Mines/ExplosiveMine.gd" id="2_6pg4e"]
 [ext_resource type="PackedScene" uid="uid://bpd0rwei7pcer" path="res://Assets/Mines/explosion.tscn" id="3_b5bp5"]
+[ext_resource type="Script" path="res://Component/Weapon.gd" id="4_3yxg5"]
 
-[node name="ExplosiveMine" instance=ExtResource("1_5b5bg")]
+[node name="ExplosiveMine" node_paths=PackedStringArray("weapon") instance=ExtResource("1_5b5bg")]
 script = ExtResource("2_6pg4e")
 dmg = 50.0
 explosionSize = 5.5
+weapon = NodePath("Weapon")
 ExplosionScene = ExtResource("3_b5bp5")
+
+[node name="Weapon" type="Node" parent="." index="3"]
+script = ExtResource("4_3yxg5")
