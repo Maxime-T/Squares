@@ -183,6 +183,6 @@ text = "X"
 [connection signal="item_selected" from="TabContainer/Graphics/GridContainer/CheckFullS" to="." method="_on_check_full_s_item_selected"]
 [connection signal="item_selected" from="TabContainer/Graphics/GridContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
 [connection signal="value_changed" from="TabContainer/Audio/Grid/VolSlider" to="." method="_on_h_slider_value_changed"]
-[connection signal="toggled" from="TabContainer/Audio/Grid/CheckMute" to="." method="_on_check_mute_toggled"]
 [connection signal="toggled" from="TabContainer/Audio/Grid/CheckMute" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="TabContainer/Audio/Grid/CheckMute" to="." method="_on_check_mute_toggled"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
