@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Assets/Player/basic_player.gd" id="1_wkey8"]
 [ext_resource type="Texture2D" uid="uid://d12ex0oxrd1as" path="res://Assets/Player/tank_bot.png" id="2_6rg5v"]
-[ext_resource type="PackedScene" uid="uid://vlbaq2hhecpn" path="res://Assets/Projectiles/Bullet.tscn" id="2_7dmdg"]
+[ext_resource type="PackedScene" uid="uid://vlbaq2hhecpn" path="res://Assets/Projectiles/Bullet.tscn" id="2_ox51s"]
 [ext_resource type="Texture2D" uid="uid://kgucvyl3ddtv" path="res://Assets/Player/tank_top.png" id="3_plv0x"]
 [ext_resource type="Script" path="res://Component/Health.gd" id="5_jcr2i"]
 [ext_resource type="Script" path="res://Component/HurtBox.gd" id="6_hrxvq"]
@@ -43,17 +43,16 @@ bg_color = Color(0.0127844, 0.705587, 0, 1)
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "ColliBox", "spawner", "Pseudo")]
+[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "ColliBox", "spawner")]
 collision_mask = 23
 script = ExtResource("1_wkey8")
 TURN_SPEED = 180.0
 BodyNode = NodePath("Body")
 TurretNode = NodePath("Turret")
 EndOfCannon = NodePath("Turret/EndOfCannon")
-BulletScene = ExtResource("2_7dmdg")
+BulletScene = ExtResource("2_ox51s")
 ColliBox = NodePath("CollisionBox")
 spawner = NodePath("MultiplayerSpawner")
-Pseudo = NodePath("HUD/VBoxContainer/Pseudo")
 
 [node name="Body" type="Node2D" parent="."]
 

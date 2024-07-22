@@ -18,6 +18,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 Global="*res://SteamMulitplayer/global.gd"
+ParticleManager="*res://Component/Effects/ParticleManager.gd"
 
 [debug]
 
@@ -89,3 +90,7 @@ Esc={
 2d_physics/layer_3="Obstacles"
 2d_physics/layer_4="Projectiles"
 2d_physics/layer_5="Zones (area)"
+
+[rendering]
+
+viewport/hdr_2d=true

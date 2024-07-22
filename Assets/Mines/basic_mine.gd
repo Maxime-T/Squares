@@ -8,6 +8,7 @@ class_name  BasicMine
 var Source : Player = null
 var ignited = false
 
+
 func _on_body_entered(body):
 	if not ignited:
 		Audio.play()

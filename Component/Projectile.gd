@@ -5,14 +5,17 @@ enum projectileType {
 	LINE,
 }
 
-@export_category("Projectile Properties")
+@export_group("Projectile Properties")
 @export var dmg : float = 25
 @export var speed : float = 1000
 @export var type : projectileType
 
-@export_category("Setup")
+@export_group("Setup")
 @export var weapon : Weapon
 @export var collision : Area2D
+
+@export_group("Explosion Particles")
+@export var explosionParticles : PackedScene
 
 var body : CharacterBody2D
 
@@ -45,17 +48,21 @@ func line_path(_delta):
 
 
 func _on_collision_with_body(_body):
-	queue_free()
+	destroy()
 
 
 func _on_collision_with_area(area):
 	if area is HurtBox:
 		area.take_damage(dmg, weapon.shooter)
 	
+	destroy()
+
+
+func destroy():
+	var part = explosionParticles.instantiate()
+	part.global_position = global_position
+	ParticleManager.create(part)
 	queue_free()
-
-
-
 
 
 
