@@ -1,0 +1,188 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwj6f2ew8bp4n"]
+
+[ext_resource type="LabelSettings" uid="uid://qxmr1l6r8xus" path="res://Assets/Themes and fonts/SettingsFont.tres" id="1_fqqrf"]
+[ext_resource type="Script" path="res://Assets/Menus/settings.gd" id="1_q6d82"]
+[ext_resource type="FontFile" uid="uid://dls6ayhhl2rq" path="res://Assets/Themes and fonts/Fortnite.ttf" id="2_h883i"]
+[ext_resource type="Theme" uid="uid://dq58g8f50bq8p" path="res://Assets/Themes and fonts/MarginCont_ThemeStettings.tres" id="3_ndrtu"]
+
+[node name="Settings" type="Control" node_paths=PackedStringArray("VolumeSlider")]
+layout_mode = 3
+anchor_left = 0.25
+anchor_top = 0.15
+anchor_right = 0.75
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q6d82")
+VolumeSlider = NodePath("TabContainer/Audio/Grid/VolSlider")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/side_margin = 28
+theme_override_fonts/font = ExtResource("2_h883i")
+theme_override_font_sizes/font_size = 38
+current_tab = 3
+
+[node name="Gameplay" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_ndrtu")
+
+[node name="Graphics" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_ndrtu")
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Graphics"]
+layout_mode = 2
+theme_override_constants/h_separation = 100
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="FullS" type="Label" parent="TabContainer/Graphics/GridContainer"]
+layout_mode = 2
+text = "Fullscreen"
+label_settings = ExtResource("1_fqqrf")
+
+[node name="CheckFullS" type="OptionButton" parent="TabContainer/Graphics/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("2_h883i")
+theme_override_font_sizes/font_size = 26
+item_count = 4
+selected = 0
+popup/item_0/text = "Window"
+popup/item_0/id = 0
+popup/item_1/text = "Borderless Window"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 2
+popup/item_3/text = "Borderless Fullscreen"
+popup/item_3/id = 3
+
+[node name="Label" type="Label" parent="TabContainer/Graphics/GridContainer"]
+layout_mode = 2
+text = "Resolution"
+label_settings = ExtResource("1_fqqrf")
+
+[node name="Resolutions" type="OptionButton" parent="TabContainer/Graphics/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("2_h883i")
+theme_override_font_sizes/font_size = 26
+item_count = 3
+selected = 0
+popup/item_0/text = "960 x 540"
+popup/item_0/id = 0
+popup/item_1/text = "1920 x 1080"
+popup/item_1/id = 1
+popup/item_2/text = "2560 x 1080"
+popup/item_2/id = 2
+
+[node name="Audio" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_ndrtu")
+
+[node name="Grid" type="GridContainer" parent="TabContainer/Audio"]
+layout_mode = 2
+theme_override_constants/h_separation = 100
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Volume" type="Label" parent="TabContainer/Audio/Grid"]
+layout_mode = 2
+text = "Volume"
+label_settings = ExtResource("1_fqqrf")
+
+[node name="VolSlider" type="HSlider" parent="TabContainer/Audio/Grid"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 20.0
+value = 10.0
+tick_count = 20
+
+[node name="Mute" type="Label" parent="TabContainer/Audio/Grid"]
+layout_mode = 2
+text = "Mute"
+label_settings = ExtResource("1_fqqrf")
+
+[node name="CheckMute" type="CheckButton" parent="TabContainer/Audio/Grid"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Controls" type="MarginContainer" parent="TabContainer"]
+layout_mode = 2
+theme = ExtResource("3_ndrtu")
+
+[node name="Languages" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_ndrtu")
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Languages"]
+layout_mode = 2
+theme_override_constants/h_separation = 100
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Language" type="Label" parent="TabContainer/Languages/GridContainer"]
+layout_mode = 2
+text = "Language"
+label_settings = ExtResource("1_fqqrf")
+
+[node name="OptionButton" type="OptionButton" parent="TabContainer/Languages/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_fonts/font = ExtResource("2_h883i")
+theme_override_font_sizes/font_size = 26
+item_count = 1
+selected = 0
+popup/item_0/text = "English"
+popup/item_0/id = 0
+
+[node name="Credits" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_ndrtu")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Credits"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_h883i")
+theme_override_font_sizes/normal_font_size = 26
+text = "The \"Bouffeurs de code\":
+
+- Lambda
+- Echoc
+
+The \"Cheveux bleu team\":
+
+- None"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 55.0
+offset_right = -30.0
+offset_bottom = 86.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
+
+[connection signal="item_selected" from="TabContainer/Graphics/GridContainer/CheckFullS" to="." method="_on_check_full_s_item_selected"]
+[connection signal="item_selected" from="TabContainer/Graphics/GridContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
+[connection signal="value_changed" from="TabContainer/Audio/Grid/VolSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="toggled" from="TabContainer/Audio/Grid/CheckMute" to="." method="_on_check_mute_toggled"]
+[connection signal="toggled" from="TabContainer/Audio/Grid/CheckMute" to="." method="_on_check_box_toggled"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

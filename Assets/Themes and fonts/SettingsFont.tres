@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://qxmr1l6r8xus"]
+
+[ext_resource type="FontFile" uid="uid://dls6ayhhl2rq" path="res://Assets/Themes and fonts/Fortnite.ttf" id="1_vveq8"]
+
+[resource]
+font = ExtResource("1_vveq8")
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
