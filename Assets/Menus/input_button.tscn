@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://xl17cigntujx"]
+
+[ext_resource type="LabelSettings" uid="uid://qxmr1l6r8xus" path="res://Assets/Themes and fonts/SettingsFont.tres" id="1_hbaha"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m73kf"]
+bg_color = Color(0, 0, 0, 0.733333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eop4e"]
+bg_color = Color(0.882353, 0.882353, 0.882353, 0.701961)
+
+[node name="InputButton" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 40)
+anchors_preset = -1
+anchor_left = 0.3
+anchor_right = 0.7
+grow_horizontal = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_m73kf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_eop4e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eop4e")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="LabelAction" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Action name"
+label_settings = ExtResource("1_hbaha")
+
+[node name="LabelInput" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Input key"
+label_settings = ExtResource("1_hbaha")
+horizontal_alignment = 2

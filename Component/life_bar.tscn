@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5q2b2bpsfwr7"]
+
+[ext_resource type="Script" path="res://Assets/Player/HUD.gd" id="1_pfqah"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yn3bj"]
+bg_color = Color(0.0127844, 0.705587, 0, 1)
+expand_margin_top = 2.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1aanr"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 4.0
+expand_margin_right = 2.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6b5x"]
+bg_color = Color(0.955963, 0.955963, 0.955963, 1)
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[node name="LifeBar" type="Control" node_paths=PackedStringArray("hp_bar", "dmg_bar", "name_label", "dmgTimer")]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_left = -50.0
+offset_top = -90.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_pfqah")
+hp_bar = NodePath("VBoxContainer/HPBar")
+dmg_bar = NodePath("VBoxContainer/HPBar/DmgBar")
+name_label = NodePath("VBoxContainer/Pseudo")
+dmgTimer = NodePath("DmgUpdateCD")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pseudo" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Salut"
+horizontal_alignment = 1
+
+[node name="HPBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_yn3bj")
+value = 50.0
+show_percentage = false
+
+[node name="DmgBar" type="ProgressBar" parent="VBoxContainer/HPBar"]
+z_index = -1
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1aanr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p6b5x")
+value = 60.0
+show_percentage = false
+
+[node name="DmgUpdateCD" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="timeout" from="DmgUpdateCD" to="." method="_on_dmg_update_cd_timeout"]

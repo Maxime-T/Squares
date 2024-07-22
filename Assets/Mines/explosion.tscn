@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dmbrs3hwmqgcv" path="res://Assets/Mines/Full_Explosion.png" id="1_ve215"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqrwb"]
-radius = 19.0
+radius = 33.0
 
 [sub_resource type="Animation" id="Animation_yi1yl"]
 resource_name = "Explosion"
