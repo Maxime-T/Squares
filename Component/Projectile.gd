@@ -14,8 +14,10 @@ enum projectileType {
 @export var weapon : Weapon
 @export var collision : Area2D
 
-@export_group("Explosion Particles")
+@export_group("Particles")
 @export var explosionParticles : PackedScene
+@export var nozzleFlash : PackedScene
+@export var recoil : float
 
 var body : CharacterBody2D
 
@@ -23,6 +25,9 @@ var direction : float
 
 
 func _ready():
+	play_flash()
+	CameraShake.shake(Vector2.from_angle(weapon.spawnRot + PI), 500, 0.15)
+	
 	collision.body_entered.connect(_on_collision_with_body)
 	collision.area_entered.connect(_on_collision_with_area)
 	
@@ -35,6 +40,14 @@ func _ready():
 	z_index = weapon.zdex
 
 
+func play_flash():
+	if nozzleFlash != null:
+		var flash = nozzleFlash.instantiate()
+		flash.global_position = global_position
+		flash.global_rotation = weapon.spawnRot
+		flash.scale = Vector2(0.3,0.3)
+		ParticleManager.create(flash)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	match type:
@@ -45,7 +58,7 @@ func _process(delta):
 func line_path(_delta):
 	velocity = Vector2(speed, 0).rotated(direction)
 	move_and_slide()
-
+	
 
 func _on_collision_with_body(_body):
 	destroy()
@@ -60,6 +73,8 @@ func _on_collision_with_area(area):
 
 func destroy():
 	var part = explosionParticles.instantiate()
+	part.global_rotation = Vector2(1,0).angle_to(get_wall_normal()) + velocity.rotated(PI).angle_to(get_wall_normal())
+
 	part.global_position = global_position
 	ParticleManager.create(part)
 	queue_free()

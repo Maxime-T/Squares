@@ -19,6 +19,7 @@ config/icon="res://Assets/icon.svg"
 
 Global="*res://SteamMulitplayer/global.gd"
 ParticleManager="*res://Component/Effects/ParticleManager.gd"
+CameraShake="*res://Component/Effects/CameraShake.gd"
 
 [debug]
 
