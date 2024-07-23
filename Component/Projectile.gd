@@ -26,7 +26,7 @@ var direction : float
 
 func _ready():
 	play_flash()
-	CameraShake.shake(Vector2.from_angle(weapon.spawnRot + PI), 500, 0.15)
+	CameraShake.shake(Vector2.from_angle(weapon.spawnRot + PI), 300, 0.1)
 	
 	collision.body_entered.connect(_on_collision_with_body)
 	collision.area_entered.connect(_on_collision_with_area)

@@ -32,7 +32,6 @@ func _process(delta):
 		
 	if camera != null:
 		camera.offset = offset
-		print(camera.offset)
 
 
 
