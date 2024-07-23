@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bph4onloul8g8"
+path="res://.godot/imported/Tactical Nuke Incoming.mp3-e1d6327dc62578092d00106836e33bf7.mp3str"
+
+[deps]
+
+source_file="res://Assets/Strikes/Tactical Nuke Incoming.mp3"
+dest_files=["res://.godot/imported/Tactical Nuke Incoming.mp3-e1d6327dc62578092d00106836e33bf7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

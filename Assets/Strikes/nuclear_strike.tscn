@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://b304osqj2qg22"]
+
+[ext_resource type="Script" path="res://Assets/Strikes/basic_strike.gd" id="1_1gpjv"]
+[ext_resource type="PackedScene" uid="uid://6agffnj0onjw" path="res://Assets/Strikes/slow_nuclear_explosion.tscn" id="2_m6gi7"]
+[ext_resource type="Script" path="res://Component/Weapon.gd" id="2_qo13k"]
+[ext_resource type="Texture2D" uid="uid://ccomueh14h0s4" path="res://Assets/Strikes/NuclearSymbol.png" id="3_825la"]
+[ext_resource type="AudioStream" uid="uid://bph4onloul8g8" path="res://Assets/Strikes/Tactical Nuke Incoming.mp3" id="5_mffr5"]
+
+[sub_resource type="Animation" id="Animation_j1nko"]
+resource_name = "Rotation"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 25.1327]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.65, 0.65), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_h026r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ucig"]
+_data = {
+"RESET": SubResource("Animation_h026r"),
+"Rotation": SubResource("Animation_j1nko")
+}
+
+[node name="NuclearStrike" type="Node2D" node_paths=PackedStringArray("WeaponNode")]
+script = ExtResource("1_1gpjv")
+ExplosionScene = ExtResource("2_m6gi7")
+WeaponNode = NodePath("Weapon")
+
+[node name="Weapon" type="Node" parent="."]
+script = ExtResource("2_qo13k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("3_825la")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0ucig")
+}
+autoplay = "Rotation"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_mffr5")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
