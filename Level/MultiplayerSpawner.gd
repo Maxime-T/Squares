@@ -27,5 +27,5 @@ func spawnPlayer(data):
 	return p
 
 func removePlayer(data):
-	players[data].queuddde_free()
+	players[data].queue_free()
 	players.erase(data)

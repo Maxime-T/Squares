@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">x
+    <g class="tank" transform="rotate(0 60 70)">
+        <g class="bottom" >
+            <rect stroke="#000000" stroke-width="1.0" fill="#565656" class="base" x="40" y="32" width="40" height="76"/>
+            
+            <g class="wheels" >
+                <polygon stroke="#000000" stroke-width="1.0" fill="#6A6A6A" class="left" points="32,40 37,30 42,30 42,110 37,110 32,100"/>
+                <polygon stroke="#000000" stroke-width="1.0" fill="#6A6A6A" class="right" points="78,30 83,30 88,40 88,100 83,110 78,110"/>
+            </g>
+        </g>
+
+        <g class="top">
+            <polygon stroke="#000000" stroke-width="1.0" fill="#7D7D7D" class="body" points="40,50 45,40 75,40 80,50 80,90 75,100 45,100 40,90"/>
+            
+            <g class="motors">
+                <rect stroke="#000000" stroke-width="1.0" fill="#6A6A6A" class="left" x="45" y="80" width="12" height="15"/>
+                <rect stroke="#000000" stroke-width="1.0" fill="#6A6A6A" class="right" x="63" y="80" width="12" height="15"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -51,6 +51,7 @@ hue_variation_max = 0.05
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.5
+collision_use_scale = true
 sub_emitter_mode = 1
 sub_emitter_frequency = 0.01
 

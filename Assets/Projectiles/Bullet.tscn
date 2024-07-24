@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://vlbaq2hhecpn"]
 
-[ext_resource type="Script" path="res://Component/Projectile.gd" id="1_ba4q7"]
+[ext_resource type="Script" path="res://Assets/Projectiles/Bullet.gd" id="1_itfpy"]
 [ext_resource type="Script" path="res://Component/Weapon.gd" id="2_bmghe"]
 [ext_resource type="Texture2D" uid="uid://cgjxaask8sbty" path="res://Assets/Projectiles/TankBullet.png" id="3_kn8mh"]
 [ext_resource type="Script" path="res://Component/Effects/Trail.gd" id="4_r4npb"]
@@ -35,11 +35,10 @@ colors = PackedColorArray(1, 0.847059, 0, 1, 1, 1, 0.415686, 1)
 
 [node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("weapon", "collision")]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 3.14159
-script = ExtResource("1_ba4q7")
-speed = 2000.0
+script = ExtResource("1_itfpy")
 weapon = NodePath("Weapon")
 collision = NodePath("Area2D")
 explosionParticles = ExtResource("6_1ubug")

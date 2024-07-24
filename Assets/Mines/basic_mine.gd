@@ -9,7 +9,7 @@ var Source : Player = null
 var ignited = false
 
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	if not ignited:
 		Audio.play()
 		Sprite.speed_scale = 3

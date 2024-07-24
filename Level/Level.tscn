@@ -1,11 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://vs5u8d2fxdnt"]
+[gd_scene load_steps=35 format=3 uid="uid://vs5u8d2fxdnt"]
 
 [ext_resource type="Script" path="res://Level/MultiplayerSpawner.gd" id="1_ymh5e"]
 [ext_resource type="PackedScene" uid="uid://brxlw75tlmw23" path="res://Assets/Player/basic_player.tscn" id="2_o7oqh"]
 [ext_resource type="Texture2D" uid="uid://c6qcip37i1tl7" path="res://Level/spritesheet_tiles.png" id="4_pwl0y"]
 [ext_resource type="PackedScene" uid="uid://18u5uq2wbw68" path="res://Assets/Mines/explosive_mine.tscn" id="4_vesw0"]
 [ext_resource type="PackedScene" uid="uid://bcg6lfspbm4gs" path="res://Assets/Mines/gaz_mine.tscn" id="5_h1jy5"]
-[ext_resource type="PackedScene" uid="uid://b304osqj2qg22" path="res://Assets/Strikes/nuclear_strike.tscn" id="6_rche6"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_m5a0d"]
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
@@ -1962,9 +1961,6 @@ position = Vector2(977, 741)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mqle7")
-
-[node name="NuclearStrike" parent="." instance=ExtResource("6_rche6")]
-position = Vector2(604, 557)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

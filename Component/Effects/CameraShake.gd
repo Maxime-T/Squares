@@ -7,13 +7,12 @@ class Shake:
 	
 	var amount : float
 	var goTime : float
-	
 	var time : float = 0
 	
-	func _init(direction : Vector2, amount : float, goTime : float):
-		self.direction = direction
-		self.amount = amount
-		self.goTime = goTime
+	func _init(_direction : Vector2, _amount : float, _goTime : float):
+		self.direction = _direction
+		self.amount = _amount
+		self.goTime = _goTime
 
 var shakes : Array[Shake]
 

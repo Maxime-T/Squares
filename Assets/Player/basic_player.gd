@@ -104,7 +104,7 @@ func shoot_if_click(event) -> void:
 
 
 #health ##########################################################
-func _on_health_died(dealer : Player):
+func _on_health_died(_dealer : Player):
 	rpc("death")
 
 @rpc("any_peer", "call_local")

@@ -39,7 +39,6 @@ func _ready():
 	global_rotation = weapon.spawnRot
 	z_index = weapon.zdex
 
-
 func play_flash():
 	if nozzleFlash != null:
 		var flash = nozzleFlash.instantiate()

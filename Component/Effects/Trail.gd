@@ -29,7 +29,7 @@ func _start():
 	line.following = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	buffer.append(follows.position)
 		
 	if buffer.size() > bufferSize:

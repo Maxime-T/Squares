@@ -6,12 +6,12 @@ var buffer : PackedVector2Array
 var bufferSize : int
 var following : bool = true
 
-func _init(follows : Node2D, bufferSize : int):
-	self.follows = follows
-	self.bufferSize = bufferSize
+func _init(_follows : Node2D, _bufferSize : int):
+	self.follows = _follows
+	self.bufferSize = _bufferSize
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if following:
 		buffer.append(follows.position)
 			
