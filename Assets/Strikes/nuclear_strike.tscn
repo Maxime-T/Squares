@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Assets/Strikes/basic_strike.gd" id="1_1gpjv"]
 [ext_resource type="PackedScene" uid="uid://6agffnj0onjw" path="res://Assets/Strikes/slow_nuclear_explosion.tscn" id="2_m6gi7"]
-[ext_resource type="Script" path="res://Component/Weapon.gd" id="2_qo13k"]
+[ext_resource type="Script" path="res://Weapons/Weapon.gd" id="2_qo13k"]
 [ext_resource type="Texture2D" uid="uid://ccomueh14h0s4" path="res://Assets/Strikes/NuclearSymbol.png" id="3_825la"]
 [ext_resource type="AudioStream" uid="uid://bph4onloul8g8" path="res://Assets/Strikes/Tactical Nuke Incoming.mp3" id="5_mffr5"]
 

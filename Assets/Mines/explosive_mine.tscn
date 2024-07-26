@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c5iv5kwferjm3" path="res://Assets/Mines/basic_mine.tscn" id="1_5b5bg"]
 [ext_resource type="Script" path="res://Assets/Mines/ExplosiveMine.gd" id="2_6pg4e"]
 [ext_resource type="PackedScene" uid="uid://bpd0rwei7pcer" path="res://Assets/Mines/explosion.tscn" id="3_b5bp5"]
-[ext_resource type="Script" path="res://Component/Weapon.gd" id="4_3yxg5"]
+[ext_resource type="Script" path="res://Weapons/Weapon.gd" id="4_3yxg5"]
 
 [node name="ExplosiveMine" node_paths=PackedStringArray("weapon") instance=ExtResource("1_5b5bg")]
 script = ExtResource("2_6pg4e")

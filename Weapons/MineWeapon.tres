@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="WeaponScene" load_steps=3 format=3 uid="uid://bdwdfmlsjlquu"]
+
+[ext_resource type="PackedScene" uid="uid://18u5uq2wbw68" path="res://Assets/Mines/explosive_mine.tscn" id="1_ko7hr"]
+[ext_resource type="Script" path="res://Weapons/WeaponScene.gd" id="1_r5kep"]
+
+[resource]
+script = ExtResource("1_r5kep")
+scene = ExtResource("1_ko7hr")

@@ -12,7 +12,6 @@ var spawnRot : float
 var spawnPos : Vector2
 var zdex : int
 
-
 func _ready():
 	t = Timer.new()
 	t.wait_time = cooldown

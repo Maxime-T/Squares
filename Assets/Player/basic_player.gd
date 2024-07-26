@@ -14,6 +14,7 @@ class_name Player
 @export var BulletScene : PackedScene
 @export var ColliBox : CollisionShape2D
 @export var spawner : MultiplayerSpawner
+@export var deck : Deck
 
 @onready var ACCELERATION = MAX_SPEED/TIME_TO_MAX_SPEED
 @onready var TURN_ACCELERATION = TURN_SPEED/TIME_TO_MAX_SPEED
@@ -37,7 +38,7 @@ var angularSpeed : float = 0:
 		angularSpeed = clamp(value, -TURN_SPEED, TURN_SPEED)
 
 func _ready():
-	spawner.spawn_function = spawnBullet
+	spawner.spawn_function = spawnWeapon
 
 func _input(event):
 	if !is_multiplayer_authority():
@@ -85,8 +86,8 @@ func deceleration_function(v, _forwardAxis, delta) -> float:
 	return cos(x*PI/2) * sign(v)
 
 #shoot ##############################################################
-func spawnBullet(_data):
-	var b : Node2D = BulletScene.instantiate()
+func spawnWeapon(weapon : WeaponScene):
+	var b : Node2D = weapon.instantiate()
 	b.global_position = EndOfCannon.global_position
 	
 	var w = b.weapon
@@ -100,7 +101,7 @@ func spawnBullet(_data):
 
 func shoot_if_click(event) -> void:
 	if event.is_action_pressed("LeftClic"):
-		spawner.spawn(BulletScene)
+		spawner.spawn(deck.next_weapon())
 
 
 #health ##########################################################

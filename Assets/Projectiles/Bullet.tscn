@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://vlbaq2hhecpn"]
+[gd_scene load_steps=10 format=3 uid="uid://vlbaq2hhecpn"]
 
-[ext_resource type="Script" path="res://Assets/Projectiles/Bullet.gd" id="1_itfpy"]
-[ext_resource type="Script" path="res://Component/Weapon.gd" id="2_bmghe"]
-[ext_resource type="Texture2D" uid="uid://cgjxaask8sbty" path="res://Assets/Projectiles/TankBullet.png" id="3_kn8mh"]
+[ext_resource type="Script" path="res://Assets/Projectiles/Projectile.gd" id="1_64y2e"]
+[ext_resource type="Script" path="res://Weapons/Weapon.gd" id="4_nhrjn"]
 [ext_resource type="Script" path="res://Component/Effects/Trail.gd" id="4_r4npb"]
 [ext_resource type="PackedScene" uid="uid://bi1k08734pw71" path="res://Component/Effects/explosion_particles.tscn" id="6_1ubug"]
 
@@ -38,7 +37,8 @@ collision_layer = 8
 collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 3.14159
-script = ExtResource("1_itfpy")
+script = ExtResource("1_64y2e")
+speed = 2000.0
 weapon = NodePath("Weapon")
 collision = NodePath("Area2D")
 explosionParticles = ExtResource("6_1ubug")
@@ -50,15 +50,6 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_ogl1v")
-
-[node name="Weapon" type="Node" parent="."]
-script = ExtResource("2_bmghe")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-rotation = -1.5708
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_kn8mh")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_sm13r")
@@ -74,3 +65,6 @@ hdr = 1.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ysrwm")
+
+[node name="Weapon" type="Node" parent="."]
+script = ExtResource("4_nhrjn")

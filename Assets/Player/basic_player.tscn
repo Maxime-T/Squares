@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://brxlw75tlmw23"]
+[gd_scene load_steps=17 format=3 uid="uid://brxlw75tlmw23"]
 
 [ext_resource type="Script" path="res://Assets/Player/basic_player.gd" id="1_wkey8"]
 [ext_resource type="PackedScene" uid="uid://vlbaq2hhecpn" path="res://Assets/Projectiles/Bullet.tscn" id="2_ox51s"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://w8ou2e2synq8" path="res://Assets/Player/Turret.svg" id="6_eqo8u"]
 [ext_resource type="Script" path="res://Component/HurtBox.gd" id="6_hrxvq"]
 [ext_resource type="PackedScene" uid="uid://b5q2b2bpsfwr7" path="res://Component/life_bar.tscn" id="7_fy1a2"]
+[ext_resource type="Script" path="res://Component/Deck.gd" id="9_aru24"]
+[ext_resource type="Resource" uid="uid://bnuyjfp42mxia" path="res://Weapons/BulletWeapon.tres" id="10_lfwky"]
+[ext_resource type="Resource" uid="uid://bdwdfmlsjlquu" path="res://Weapons/MineWeapon.tres" id="11_uyf25"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_300em"]
 size = Vector2(313.333, 220)
@@ -38,7 +41,7 @@ properties/4/path = NodePath("LifeBar/VBoxContainer/Pseudo:text")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "ColliBox", "spawner")]
+[node name="basic_player" type="CharacterBody2D" node_paths=PackedStringArray("BodyNode", "TurretNode", "EndOfCannon", "ColliBox", "spawner", "deck")]
 collision_mask = 23
 script = ExtResource("1_wkey8")
 TURN_SPEED = 180.0
@@ -48,6 +51,7 @@ EndOfCannon = NodePath("Turret/EndOfCannon")
 BulletScene = ExtResource("2_ox51s")
 ColliBox = NodePath("CollisionBox")
 spawner = NodePath("MultiplayerSpawner")
+deck = NodePath("Deck")
 
 [node name="Body" type="Node2D" parent="."]
 scale = Vector2(0.3, 0.3)
@@ -96,6 +100,11 @@ script = ExtResource("5_jcr2i")
 grow_horizontal = 1
 grow_vertical = 1
 health_component = NodePath("../Health")
+metadata/_edit_use_anchors_ = true
+
+[node name="Deck" type="Node" parent="."]
+script = ExtResource("9_aru24")
+weapons = Array[Resource("res://Weapons/WeaponScene.gd")]([ExtResource("10_lfwky"), ExtResource("11_uyf25")])
 
 [connection signal="died" from="Health" to="." method="_on_health_died"]
 [connection signal="healt_changed" from="Health" to="LifeBar" method="_on_health_healt_changed"]
